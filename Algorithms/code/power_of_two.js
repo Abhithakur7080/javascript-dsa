@@ -16,8 +16,8 @@ function isPowerOfTwoBitwise(n){
     }
     return (n & (n-1))===0;
 }
-console.log(isPowerOfTwoBitwise(1));//true -> 
-console.log(isPowerOfTwoBitwise(2));//true
-console.log(isPowerOfTwoBitwise(3));//false
-console.log(isPowerOfTwoBitwise(4));//true
-console.log(isPowerOfTwoBitwise(5));//false
+console.log(isPowerOfTwoBitwise(1));//true -> 001 & 000 = 000
+console.log(isPowerOfTwoBitwise(2));//true -> 010 & 001 = 000
+console.log(isPowerOfTwoBitwise(3));//false -> 011 & 010 = 010
+console.log(isPowerOfTwoBitwise(4));//true -> 100 & 011 = 000
+console.log(isPowerOfTwoBitwise(5));//false -> 101 & 100 = 100
