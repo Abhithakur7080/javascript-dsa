@@ -64,19 +64,67 @@ class LinkedList {
       return;
     }
     let removedNode;
-    if(index === 0){
-        removedNode = this.head
-        this.head = this.head.next
+    if (index === 0) {
+      removedNode = this.head;
+      this.head = this.head.next;
     } else {
-        let prev = this.head
-        for(let i=0; i<index-1; i++){
-            prev = prev.next
-        }
-        removedNode = prev.next
-        prev.next = removedNode.next
+      let prev = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        prev = prev.next;
+      }
+      removedNode = prev.next;
+      prev.next = removedNode.next;
     }
     this.size--;
-    return removedNode.value
+    return removedNode.value;
+  }
+  removeValue(value) {
+    if (this.isEmpty()) {
+      return null;
+    }
+    if (this.head.value === value) {
+      this.head = this.head.next;
+      this.size--;
+      return value;
+    } else {
+      let prev = this.head;
+      while (prev.next && prev.next.value !== value) {
+        prev = prev.next;
+      }
+      if (prev.next) {
+        let removedNode = prev.next;
+        prev.next = removedNode.next;
+        this.size--;
+        return value;
+      }
+      return null;
+    }
+  }
+  search(value){
+    if(this.isEmpty()){
+      return -1;
+    }
+    let i=0;
+    let curr = this.head
+    while(curr){
+      if(curr.value === value){
+        return i
+      }
+      curr = curr.next
+      i++;
+    }
+    return -1;
+  }
+  reverse(){
+    let prev = null;
+    let curr = this.head;
+    while(curr){
+      let next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next
+    }
+    this.head = prev;
   }
   print() {
     if (this.isEmpty()) {
@@ -123,7 +171,20 @@ list.print(); //10 -> 30 -> 20 -> 10 -> 20 -> 5 -> 10 -> 15 -> null
 list.add(10);
 list.print(); //10 -> 30 -> 20 -> 10 -> 20 -> 5 -> 10 -> 15 -> 10 -> null
 
-console.log(list.getSize())//8
-list.remove(5);
-list.print()//10 -> 30 -> 20 -> 10 -> 20 -> 10 -> 15 -> null || removed = 5
-console.log(list.getSize())//7
+console.log(list.getSize()); //8
+list.remove(5);//remove by index
+list.print(); //10 -> 30 -> 20 -> 10 -> 20 -> 10 -> 15 -> null || removed = 5
+console.log(list.getSize()); //7
+
+list.removeValue(20);//remove by value
+list.print(); //10 -> 30 -> 10 -> 20 -> 10 -> 15 -> null || removed = 20
+console.log(list.getSize()); //6
+
+//search by value
+console.log(list.search(20));//3 index
+console.log(list.search(30));//1 index
+console.log(list.search(50));//-1 index not found
+
+//reverse list
+list.reverse()
+list.print()//15 -> 10 -> 20 -> 10 -> 30 -> 10 -> null
