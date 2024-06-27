@@ -9,11 +9,11 @@ var longestSubstringWithKdistinct = function (str, k) {
   let charFrequency = new Map();
 
   for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
-    const endChar = str[windowEnd];
+    const endChar = str.charAt(windowEnd);
     charFrequency.set(endChar, charFrequency.get(endChar) + 1 || 1);
 
     while (charFrequency.size > k) {
-        const startChar = str[windowStart];
+        const startChar = str.charAt(windowStart);
         charFrequency.set(startChar, charFrequency.get(startChar) - 1);
         if (charFrequency.get(startChar) === 0) {
             charFrequency.delete(startChar);
